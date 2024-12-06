@@ -1,17 +1,17 @@
-#Project Overview
+# Project Overview
 This project implements a simplified version of a distributed, fault-tolerant Key-Value (KV) database. The database uses a Trie data structure for storing and retrieving keys. The project consists of three main components:
 1.Data Creation: This program generates syntactically correct data that will be loaded into the KV store.
 2.KV Broker: This program accepts queries from users, routes them to the appropriate KV Servers, collects results, and presents them to the user. It also handles data replication and fault tolerance.
 3.KV Server: This program stores the actual data and processes queries from the KV Broker. It utilises a Trie data structure for efficient key lookups.
 
-##1.How to Compile and Execute the code:
+## 1.How to Compile and Execute the code:
 You're going to need Python installed, preferably Python 3
 
-##2.How to run the data creation:
+## 2.How to run the data creation:
 You need to open the terminal and open the project folder,
 now use this command to generate the dataToIndex.txt file:
 ```bash
-    python3 DataCreation.py -k keyFile.txt -n 50 -d 4 -m 5 -l 4
+python3 DataCreation.py -k keyFile.txt -n 50 -d 4 -m 5 -l 4
 ```
 You can customize this command to generate a file to your needs:
 -n number of rows of the generated file
@@ -20,10 +20,11 @@ You can customize this command to generate a file to your needs:
 -l maximum length of the string values
 -k is the name of the file that contains the key names and their data types (you can add more if you want)
 
-##3.How to run the servers:
+## 3.How to run the servers:
 You need to open the terminal and open the project folder, and execute this command:
-    python3 KVServer.py -a 127.0.0.1 -p 8001
-
+```bash
+python3 KVServer.py -a 127.0.0.1 -p 8001
+```
 You can customize it according to your needs:
 -a the IP address to bind to
 -p the port number to listen to
@@ -31,10 +32,11 @@ You can customize it according to your needs:
 In order to run multiple server you need to open multiple instances of the terminal and run the same command and change the port (e.g 8002/8003/...)
 
 
-##4.How to run the broker
+## 4.How to run the broker
 Again inside the project folder you need to run this command:
-    python3 KVBroker.py -s serverFile.txt -i dataToIndex.txt -k 3
-
+```bash
+python3 KVBroker.py -s serverFile.txt -i dataToIndex.txt -k 3
+```
 You can customize the command to your needs:
 -s is the name of the file that contains the KV Server IPs and ports locally (you can customize it if you want)
 -i the name of the file that the broker is going to use to get the data in order to share it with the servers
