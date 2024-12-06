@@ -63,8 +63,6 @@ def json_to_string_file(input_file, output_file):
             line = line[1:-1]
             outfile.write(line + "\n")
 
-    print(f"Transformed data saved to {output_file}")
-
 def create_data(keyfile_path, num_lines, max_depth, max_keys, max_length):
     """Create a dataset of randomly generated key-value pairs."""
     keys = parse_keyfile(keyfile_path)
@@ -103,4 +101,4 @@ if __name__ == "__main__":
     #transform JSON to txt
     with open("dataToIndex.txt", "w") as outfile:
         json_to_string_file("output.json", "dataToIndex.txt")
-    print("Dataset successfully generated and saved to output.json!")
+    print("Dataset successfully generated and saved to dataToIndex.txt")
