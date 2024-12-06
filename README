@@ -10,8 +10,9 @@ You're going to need Python installed, preferably Python 3
 ##2.How to run the data creation:
 You need to open the terminal and open the project folder,
 now use this command to generate the dataToIndex.txt file:
+```bash
     python3 DataCreation.py -k keyFile.txt -n 50 -d 4 -m 5 -l 4
-
+```
 You can customize this command to generate a file to your needs:
 -n number of rows of the generated file
 -d maximum nesting level

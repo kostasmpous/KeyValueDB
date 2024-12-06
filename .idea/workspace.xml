@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a3bfe76-5ebf-4eae-a200-1b6619b15909" name="Changes" comment="add some functionlities in the server side">
-      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
+    <list default="true" id="1a3bfe76-5ebf-4eae-a200-1b6619b15909" name="Changes" comment="add read me file">
+      <change afterPath="$PROJECT_DIR$/README" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +129,7 @@
       <updated>1733256331632</updated>
       <workItem from="1733256333010" duration="2909000" />
       <workItem from="1733265987189" duration="393000" />
-      <workItem from="1733295579569" duration="64418000" />
+      <workItem from="1733295579569" duration="64586000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -163,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733524915319</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add read me file">
+      <option name="closed" value="true" />
+      <created>1733525031403</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733525031403</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,7 +180,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="add some functionlities in the server side" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some functionlities in the server side" />
+    <MESSAGE value="add read me file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add read me file" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/KeyValueDB$KVBroker.coverage" NAME="KVBroker Coverage Results" MODIFIED="1733350599224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
