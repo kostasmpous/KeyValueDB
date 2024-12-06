@@ -3,7 +3,7 @@ import random
 
 # Configuration and Setup
 servers = []  # List to store server IPs and ports
-replication_factor = 2  # Default replication factor
+replication_factor = 3  # Default replication factor
 
 # Function to read server IPs and ports from serverFile.txt
 def read_server_file(filename):
@@ -81,14 +81,17 @@ def handle_get(key):
     for server_ip, server_port in servers:
         response = send_command(server_ip[0], server_ip[1], f"GET {key}")
         responses.append(response)
-        if "NOT FOUND" not in response and "ERROR" not in response:
+        if "ERROR" not in response:
             available_servers += 1
     print(f"Available servers: {available_servers}")
     if available_servers < replication_factor:
         print("WARNING: Fewer than k servers available. Results may be inconsistent.")
-
+    flag = "NOT FOUND"
     for response in responses:
-        print(response)
+        if response != "NOTFOUND":
+            flag = response
+    print(flag)
+
 
 # Function to handle DELETE command
 def handle_delete(key):
@@ -98,7 +101,7 @@ def handle_delete(key):
         key (str): The key to be deleted.
     """
     for server_ip, server_port in servers:
-        response = send_command(server_ip, server_port, f"DELETE {key}")
+        response = send_command(server_ip[0], server_ip[1], f"DELETE {key}")
         if "ERROR" in response:
             print(f"ERROR: Could not delete from server {server_ip}:{server_port}. Deletion aborted.")
             return
@@ -114,7 +117,7 @@ def handle_query(keypath):
     available_servers = 0
     responses = []
     for server_ip, server_port in servers:
-        response = send_command(server_ip, server_port, f"QUERY {keypath}")
+        response = send_command(server_ip[0], server_ip[1], f"QUERY {keypath}")
         responses.append(response)
         if "NOT FOUND" not in response and "ERROR" not in response:
             available_servers += 1

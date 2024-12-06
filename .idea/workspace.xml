@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a3bfe76-5ebf-4eae-a200-1b6619b15909" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/KeyValueDB.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataCreation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KVBroker.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KVServer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keyFile.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/serverFile.txt" afterDir="false" />
+    <list default="true" id="1a3bfe76-5ebf-4eae-a200-1b6619b15909" name="Changes" comment="initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataCreation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KVBroker.py" beforeDir="false" afterPath="$PROJECT_DIR$/KVBroker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KVServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/KVServer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/keyFile.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "kostasmpous"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kostasmpous/KeyValueDB.git",
+    "accountId": "e9b42ddb-2f49-4775-9715-aa913889552c"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -44,7 +49,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Python.DataCreation.executor": "Run",
+    "Python.DataCreation.executor": "Debug",
     "Python.KVBroker.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -128,26 +133,28 @@
       <updated>1733256331632</updated>
       <workItem from="1733256333010" duration="2909000" />
       <workItem from="1733265987189" duration="393000" />
-      <workItem from="1733295579569" duration="28713000" />
+      <workItem from="1733295579569" duration="51329000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1733413892422</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733413892422</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DataCreation.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/KeyValueDB$KVBroker.coverage" NAME="KVBroker Coverage Results" MODIFIED="1733350599224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/KeyValueDB$DataCreation.coverage" NAME="DataCreation Coverage Results" MODIFIED="1733366994996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KeyValueDB$DataCreation.coverage" NAME="DataCreation Coverage Results" MODIFIED="1733487947366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

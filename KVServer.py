@@ -1,5 +1,7 @@
+import json
 import socket
 import threading
+import re
 
 class TrieNode:
     def __init__(self):
@@ -7,6 +9,7 @@ class TrieNode:
         self.children = {}
         self.is_end_of_word = False
         self.value = None
+
 
 class Trie:
     def __init__(self):
@@ -32,19 +35,11 @@ class Trie:
             if char not in node.children:
                 return False
             node = node.children[char]
-        return word + node.value
-
-    def starts_with(self, prefix):
-        """Check if there's any word in the trie that starts with the given prefix."""
-        node = self.root
-        for char in prefix:
-            if char not in node.children:
-                return False
-            node = node.children[char]
-        return True
+        return node.value
 
     def delete(self, word):
         """Delete a word from the trie if it exists."""
+        print(word)
         def _delete(node, word, depth):
             if not node:
                 return False  # Word not found
@@ -84,35 +79,46 @@ def handle_client(client_socket):
             data = client_socket.recv(1024).decode('utf-8')
             if not data:
                 break  # Connection closed
-
+            print(data)
             # Split the data into command and arguments
             command, *args = data.split()
             # Handle different commands
-            if command == 'PUT':
-                key, value = args, ' '.join(args[1:])
-                print(value)
-                trie.insert(str(key[0]).strip('"'),value)
+            if 'PUT' in data:
+                pattern = r'\bperson\d+\b'
+                key = re.search(pattern,data)
+                data = data.replace("PUT ","")
+                trie.insert(str(key.group()),data)
                 client_socket.send('OK'.encode('utf-8'))
-            elif command == 'GET':
-                print(trie)
-                key = args
-                print(key[0])
-                print(type(key[0]))
-                value = trie.search(key[0])
+            elif 'GET' in data:
+                pattern = r'\bperson\d+\b'
+                key = re.search(pattern,data)
+                value = trie.search(key.group())
                 if value is not False:
                     client_socket.send(value.encode('utf-8'))
                 else:
                     client_socket.send('NOTFOUND'.encode('utf-8'))
-            elif command == 'DELETE':
-                key = args
-                if trie.delete(key):
+            elif 'DELETE' in data:
+                pattern = r'\bperson\d+\b'
+                key = re.search(pattern, data)
+                if trie.delete(key.group())!=False:
                     client_socket.send('OK'.encode('utf-8'))
                 else:
                     client_socket.send('NOTFOUND'.encode('utf-8'))
-            elif command == 'QUERY':
-                key_path = args
-                keys = key_path.split('.')
-                value = trie.search(keys)
+            elif 'QUERY' in data:
+                pattern = r'\bperson\d+\b'
+                key = re.search(pattern, data)
+                value = trie.search(key.group())
+                print(value)
+                print(keys)
+                reply=''
+                while keys:
+                    word = keys.pop(0)
+                    print(word)
+                    index = value.find(word)
+                    if index != -1:
+                        value = value[index:]
+                        value = value.replace(word+ "':","")
+                    print(value)
                 if value is not None:
                     for key in keys[1:]:
                         if isinstance(value, dict) and key in value:
