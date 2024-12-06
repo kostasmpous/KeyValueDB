@@ -16,43 +16,37 @@ class Trie:
         # The root of the trie doesn't store any character
         self.root = TrieNode()
 
+    #insert a word in the trie
     def insert(self, word,value):
-        """Insert a word into the trie."""
         node = self.root
         for char in word:
             if char not in node.children:
                 # Add a new node for the character if it doesn't exist
                 node.children[char] = TrieNode()
             node = node.children[char]
-        # Mark the end of the word
-        node.value = value
-        node.is_end_of_word = True
+        node.value = value#add the whole string of data to the last node
+        node.is_end_of_word = True# Mark the end of the word
 
+    #search the trie for a word and return the data
     def search(self, word):
-        """Search for a word in the trie. Returns True if found, otherwise False."""
-        node = self.root
-        for char in word:
-            if char not in node.children:
+        node = self.root#start the search from the root
+        for char in word:#for each character in the word
+            if char not in node.children:#if the character is not in the children node return false
                 return False
-            node = node.children[char]
+            node = node.children[char]#else traverse further
         return node.value
 
+    # delete a word from the trie if exists
     def delete(self, word):
-        """Delete a word from the trie if it exists."""
-        print(word)
         def _delete(node, word, depth):
-            if not node:
-                return False  # Word not found
-
-            # Base case: If we've reached the end of the word
-            if depth == len(word):
-                if node.is_end_of_word:
-                    node.is_end_of_word = False  # Unmark the end of word
-                    # If the current node has no children, it can be deleted
-                    return len(node.children) == 0
+            if not node:#Word is not found
                 return False
-
-            # Recursive case: Process the next character
+            if depth == len(word):#If we've reached the end of the word
+                if node.is_end_of_word:
+                    node.is_end_of_word = False#Unmark the end of word
+                    return len(node.children) == 0# If the current node has no children, it can be deleted
+                return False
+            #Process the next character
             char = word[depth]
             if char in node.children:
                 should_delete_child = _delete(node.children[char], word, depth + 1)
@@ -62,7 +56,6 @@ class Trie:
                     del node.children[char]
                     # Return True if the current node has no other children and is not the end of another word
                     return len(node.children) == 0 and not node.is_end_of_word
-
             return False
 
         _delete(self.root, word, 0)
@@ -79,20 +72,17 @@ def handle_client(client_socket):
             data = client_socket.recv(1024).decode('utf-8')
             if not data:
                 break  # Connection closed
-            print(data)
-            # Split the data into command and arguments
-            command, *args = data.split()
             # Handle different commands
             if 'PUT' in data:
                 pattern = r'\bperson\d+\b'
-                key = re.search(pattern,data)
-                data = data.replace("PUT ","")
-                trie.insert(str(key.group()),data)
+                key = re.search(pattern,data)#in data find the person high level key
+                data = data.replace("PUT ","")# remove the PUT
+                trie.insert(str(key.group()),data)#insert the data
                 client_socket.send('OK'.encode('utf-8'))
             elif 'GET' in data:
                 pattern = r'\bperson\d+\b'
                 key = re.search(pattern,data)
-                value = trie.search(key.group())
+                value = trie.search(key.group())#search the data after formating it
                 if value is not False:
                     client_socket.send(value.encode('utf-8'))
                 else:
@@ -100,40 +90,29 @@ def handle_client(client_socket):
             elif 'DELETE' in data:
                 pattern = r'\bperson\d+\b'
                 key = re.search(pattern, data)
-                if trie.delete(key.group())!=False:
+                if trie.delete(key.group())!=False:#try delete the data
                     client_socket.send('OK'.encode('utf-8'))
                 else:
-                    client_socket.send('NOTFOUND'.encode('utf-8'))
+                    client_socket.send('NOTFOUND'.encode('utf-8'))#if not in the trie
             elif 'QUERY' in data:
                 pattern = r'\bperson\d+\b'
                 key = re.search(pattern, data)
-                value = trie.search(key.group())
-                print(value)
-                print(keys)
-                reply=''
-                while keys:
-                    word = keys.pop(0)
-                    print(word)
-                    index = value.find(word)
-                    if index != -1:
-                        value = value[index:]
-                        value = value.replace(word+ "':","")
-                    print(value)
-                if value is not None:
-                    for key in keys[1:]:
-                        if isinstance(value, dict) and key in value:
-                            value = value[key]
+                value = trie.search(key.group())#search for the data after formatting it
+                if value is not False:
+                    value = value.replace(";",",")
+                    value = "{"+value+"}"
+                    jsn = json.loads(value)#formating the string to load it as json and traverse it
+                    data= data.replace("QUERY ","")
+                    keys = data.split(".")
+                    for k in keys:
+                        if isinstance(jsn,dict) and k in jsn:#traverse json object
+                            jsn = jsn[k]
                         else:
-                            value = None
-                            break
-                    if value is not None:
-                        client_socket.send(str(value).encode('utf-8'))
-                    else:
-                        client_socket.send('NOTFOUND'.encode('utf-8'))
+                            client_socket.send('NOTFOUND'.encode('utf-8'))
+                    result = data +" : "+ str(jsn)#make the result and return it
+                    client_socket.send(result.encode('utf-8'))
                 else:
                     client_socket.send('NOTFOUND'.encode('utf-8'))
-            else:
-                client_socket.send('ERROR: Invalid command'.encode('utf-8'))
         except Exception as e:
             client_socket.send(f'ERROR: {str(e)}'.encode('utf-8'))
 
