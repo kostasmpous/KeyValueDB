@@ -68,7 +68,8 @@ def handle_get(key):
         responses.append(response)
         if "ERROR" not in response:
             available_servers += 1
-        if "NOTFOUND" in response:
+        if "NoneType" in response:
+            available_servers += 1
             check_backup(server_ip,key)
     print(f"Available servers: {available_servers}")
     if available_servers < replication_factor:#if needed warn the user about the available server number
@@ -87,7 +88,8 @@ def handle_delete(key):
         if "ERROR" in response:
             print(f"ERROR: Could not delete from server {server_ip}:{server_port}. Deletion aborted.")
             return
-    map_data.pop(key)#remove the data from map
+    if map_data.get(key):
+        map_data.pop(key)#remove the data from map
     print("Key deleted successfully from all servers.")
 
 # Function to handle QUERY command

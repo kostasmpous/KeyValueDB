@@ -39,26 +39,32 @@ class Trie:
     # delete a word from the trie if exists
     def delete(self, word):
         def _delete(node, word, depth):
-            if not node:#Word is not found
-                return False
-            if depth == len(word):#If we've reached the end of the word
+            # If we've reached the end of the word
+            if depth == len(word):
                 if node.is_end_of_word:
-                    node.is_end_of_word = False#Unmark the end of word
-                    return len(node.children) == 0# If the current node has no children, it can be deleted
-                return False
-            #Process the next character
-            char = word[depth]
-            if char in node.children:
-                should_delete_child = _delete(node.children[char], word, depth + 1)
+                    node.is_end_of_word = False
+                    node.value = None
+                    # If node has no children, it can be deleted
+                    return len(node.children) == 0
+                return False  # Word not found
 
-                # If the child node can be deleted, remove it
-                if should_delete_child:
-                    del node.children[char]
-                    # Return True if the current node has no other children and is not the end of another word
-                    return len(node.children) == 0 and not node.is_end_of_word
+            char = word[depth]
+            if char not in node.children:
+                return False  # Word not found
+
+            # Recursively delete the child node
+            should_delete_child = _delete(node.children[char], word, depth + 1)
+
+            # If child node should be deleted, remove it
+            if should_delete_child:
+                del node.children[char]
+                # Return True if current node has no children and is not end of another word
+                return len(node.children) == 0 and not node.is_end_of_word
+
             return False
 
-        _delete(self.root, word, 0)
+        # Call the recursive delete function starting from the root
+        return _delete(self.root, word, 0)
 
 
 # Initialize the Trie
